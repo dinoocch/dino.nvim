@@ -1,0 +1,11 @@
+[package]
+name = "dino-nvim"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+nvim-oxi = "0.1"
+dirs = "4.0"

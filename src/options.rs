@@ -3,7 +3,6 @@ use std::path::{Path, PathBuf};
 
 use nvim_oxi::{self as oxi, api};
 
-
 pub fn setup_options() -> oxi::Result<()> {
     api::set_option_value("colorcolumn", "80", None)?;
     api::set_option_value("cursorline", true, None)?;
@@ -68,7 +67,6 @@ pub fn setup_options() -> oxi::Result<()> {
 
     Ok(())
 }
-
 
 fn create_and_set_dir(name: &str, path: &PathBuf) -> oxi::Result<()> {
     if path.exists() || fs::create_dir_all(&path).is_ok() {

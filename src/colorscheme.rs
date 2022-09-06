@@ -8,7 +8,12 @@ macro_rules! highlight {
         api::set_hl(
             0,
             $hlname,
-            Some(&SetHighlightOpts::builder().fg($fg).bg($bg).build()),
+            Some(
+                &SetHighlightOpts::builder()
+                    .foreground($fg)
+                    .background($bg)
+                    .build(),
+            ),
         )?;
     };
     ($hlname:expr, $fg:expr, $bg:expr, $key:ident) => {
@@ -17,8 +22,8 @@ macro_rules! highlight {
             $hlname,
             Some(
                 &SetHighlightOpts::builder()
-                    .fg($fg)
-                    .bg($bg)
+                    .foreground($fg)
+                    .background($bg)
                     .$key(true)
                     .build(),
             ),
@@ -30,14 +35,19 @@ macro_rules! fhighlight {
         api::set_hl(
             0,
             $hlname,
-            Some(&SetHighlightOpts::builder().fg($fg).build()),
+            Some(&SetHighlightOpts::builder().foreground($fg).build()),
         )?;
     };
     ($hlname:expr, $fg:expr, $key:ident) => {
         api::set_hl(
             0,
             $hlname,
-            Some(&SetHighlightOpts::builder().fg($fg).$key(true).build()),
+            Some(
+                &SetHighlightOpts::builder()
+                    .foreground($fg)
+                    .$key(true)
+                    .build(),
+            ),
         )?;
     };
 }
@@ -46,14 +56,19 @@ macro_rules! bhighlight {
         api::set_hl(
             0,
             $hlname,
-            Some(&SetHighlightOpts::builder().bg($bg).build()),
+            Some(&SetHighlightOpts::builder().background($bg).build()),
         )?;
     };
     ($hlname:expr, $bg:expr, $key:ident) => {
         api::set_hl(
             0,
             $hlname,
-            Some(&SetHighlightOpts::builder().bg($bg).$key(true).build()),
+            Some(
+                &SetHighlightOpts::builder()
+                    .background($bg)
+                    .$key(true)
+                    .build(),
+            ),
         )?;
     };
 }
@@ -94,7 +109,6 @@ struct Colors<'a> {
     neutral_purple: &'a str,
     neutral_aqua: &'a str,
     // neutral_orange: &'a str,
-
     bg0: &'a str,
     bg1: &'a str,
     bg2: &'a str,
@@ -796,7 +810,6 @@ const GRUVBOX_DARK: Colors<'static> = Colors {
     neutral_purple: "#b16286",
     neutral_aqua: "#689d6a",
     // neutral_orange: "#d65d0e",
-
     fg0: "#fbf1c7",
     fg1: "#ebdbb2",
     fg2: "#d5c4a1",

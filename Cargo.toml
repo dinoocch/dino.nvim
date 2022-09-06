@@ -7,5 +7,10 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-nvim-oxi = "0.1"
+nvim-oxi = { git = "https://github.com/noib3/nvim-oxi", features = ["mlua"] }
 dirs = "4.0"
+git2 = "0.15"
+mlua = { version = "0.8", features = ["luajit"] }
+lazy_static = "*"
+regex = "1.6"
+colors-transform = "0.2"

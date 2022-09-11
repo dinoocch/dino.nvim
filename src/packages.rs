@@ -30,7 +30,7 @@ pub fn setup_packer() -> oxi::Result<()> {
     }
 }
 
-// This is super ugly, will just start implementing these in rust I guesse
+// This is super ugly, will just start rir someday
 pub fn add_packages() -> oxi::Result<()> {
     let lua = oxi::mlua::lua();
     let package_config = lua.load(
@@ -53,14 +53,10 @@ pub fn add_packages() -> oxi::Result<()> {
             })
 
             use({
-                "SmiteshP/nvim-gps",
-                requires = "nvim-treesitter/nvim-treesitter",
+                "SmiteshP/nvim-navic",
+                requires = "neovim/nvim-lspconfig",
                 config = function()
-                    require("nvim-gps").setup({
-                        languages = {
-                            ["lua"] = false,
-                        },
-                    })
+                    require("nvim-gps").setup()
                 end,
             })
 
@@ -80,6 +76,9 @@ pub fn add_packages() -> oxi::Result<()> {
                             },
                         },
                         indent = { enable = true },
+                        rainbow = {
+                            enable = true,
+                        },
                     })
                 end,
             })
@@ -87,13 +86,6 @@ pub fn add_packages() -> oxi::Result<()> {
             use({
                 "p00f/nvim-ts-rainbow",
                 requires = "nvim-treesitter/nvim-treesitter",
-                config = function()
-                    require("nvim-treesitter.configs").setup({
-                        rainbow = {
-                            enable = true,
-                        },
-                    })
-                end,
             })
 
             use({
@@ -129,10 +121,6 @@ pub fn add_packages() -> oxi::Result<()> {
                     vim.g.nvim_tree_git_hl = 1
                     require("nvim-tree").setup({
                         open_on_setup = false,
-                        git = {
-                            enable = true,
-                            ignore = true,
-                        },
                         filters = {
                             custom = { ".git", "node_modules", ".cache" },
                         },
@@ -168,9 +156,6 @@ pub fn add_packages() -> oxi::Result<()> {
                     require("gitsigns").setup()
                 end,
             })
-
-            -- Allow renaming files with :rename <newname>
-            use("danro/rename.vim")
 
             -- chdir to a 'root' directory when editing
             use("airblade/vim-rooter")
@@ -208,10 +193,6 @@ pub fn add_packages() -> oxi::Result<()> {
                 end,
             })
 
-            -- Guess at indentation settings from the file
-            -- TODO: Figure out treesitter indent
-            use("tpope/vim-sleuth")
-
             -- Comment stuff out
             use({
                 "terrortylor/nvim-comment",
@@ -237,9 +218,6 @@ pub fn add_packages() -> oxi::Result<()> {
                     -- map('n', 'ga', '<Plug>(EasyAlign)', {noremap = false})
                 end,
             })
-
-            -- Secure modelines
-            use("ciaranm/securemodelines")
 
             -- lsp
             use({
@@ -400,6 +378,14 @@ pub fn add_packages() -> oxi::Result<()> {
 
             use({
                 "rodjek/vim-puppet",
+            })
+
+            use({
+                "ThePrimeagen/harpoon",
+                requires = {
+                    "nvim-lua/plenary.nvim",
+                },
+                -- TODO: Add keybinds
             })
         end)
         "#);

@@ -7,10 +7,19 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-nvim-oxi = { git = "https://github.com/noib3/nvim-oxi", features = ["mlua"] }
 dirs = "4.0"
 git2 = "0.15"
 mlua = { version = "0.8", features = ["luajit"] }
 lazy_static = "*"
 regex = "1.6"
 colors-transform = "0.2"
+
+# For git dependencies, use `cargo update` to pull new versions
+nvim-oxi = { git = "https://github.com/noib3/nvim-oxi", features = ["mlua", "loop"] }
+
+# nvim-completion -- not sure if this is cleaner than separate deps?
+# nvim-completion-core = { git = "https://github.com/noib3/nvim-completion.git" }
+# nvim-completion-lipsum = { git = "https://github.com/noib3/nvim-completion.git" }
+# nvim-completion-lsp = { git = "https://github.com/noib3/nvim-completion.git" }
+#
+# serde = { version = "1.0", features = ["derive"] }

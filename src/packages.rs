@@ -319,13 +319,6 @@ pub fn add_packages() -> oxi::Result<()> {
                 end,
             })
 
-            use({
-                "theHamsta/nvim-dap-virtual-text",
-                config = function()
-                    vim.g.dap_virtual_text = true
-                end,
-            })
-
             -- More syntaxes
             use("sheerun/vim-polyglot")
 
@@ -386,6 +379,10 @@ pub fn add_packages() -> oxi::Result<()> {
                     "nvim-lua/plenary.nvim",
                 },
                 -- TODO: Add keybinds
+                config = function()
+                    vim.keymap.set("n", "<leader>a", function() require("harpoon.mark").add_file() end, { silent = true, noremap = true })
+                    vim.keymap.set("n", "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end, { silent = true, noremap = true })
+                end,
             })
         end)
         "#);
